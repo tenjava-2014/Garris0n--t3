@@ -1,0 +1,3 @@
+name: Garris0n--t3
+main: com.tenjava.entries.Garris0n_.t3.TenJava
+version: '${project.version}'
