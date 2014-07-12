@@ -5,7 +5,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 
 public final class Main extends JavaPlugin{
@@ -48,6 +49,9 @@ public final class Main extends JavaPlugin{
 
     public void saveDefaultPlagues(){
 
+        if(plaguesFile == null)
+            plaguesFile = new File(getDataFolder(), "plagues.yml");
+
         if(!plaguesFile.exists())
             saveResource("plagues.yml", false);
 
@@ -55,19 +59,10 @@ public final class Main extends JavaPlugin{
 
     public void reloadPlagues(){
 
-        if(plaguesFile == null)
-            plaguesFile = new File(getDataFolder(), "plagues.yml");
+        if(plaguesFile == null || !plaguesFile.exists())
+            saveDefaultPlagues();
 
         plagues = YamlConfiguration.loadConfiguration(plaguesFile);
-
-        InputStream defConfigStream = this.getResource("plagues.yml");
-
-        if(defConfigStream != null){
-
-            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-            plagues.setDefaults(defConfig);
-
-        }
 
     }
 

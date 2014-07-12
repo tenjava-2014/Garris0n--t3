@@ -34,6 +34,8 @@ public class Plague{
 
         this.infected = new HashSet<>();
 
+        plugin.debug("Loaded plague " + getDisplayName() + ".");
+
     }
 
     public void infect(LivingEntity entity){

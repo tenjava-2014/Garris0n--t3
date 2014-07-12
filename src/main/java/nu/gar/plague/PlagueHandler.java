@@ -16,6 +16,8 @@ public class PlagueHandler{
         this.plugin = plugin;
         this.plagues = new HashMap<>();
 
+        loadPlagues();
+
     }
 
     private void loadPlagues(){

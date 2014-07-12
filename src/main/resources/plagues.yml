@@ -10,7 +10,7 @@ swine-flu:
       duration: 200
       amplifier: 1
       initial-delay: 0
-      frequency:  20000
+      frequency: 20000
   causes:
     RANDOM:
       initial-delay:0
