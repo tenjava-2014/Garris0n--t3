@@ -7,14 +7,14 @@ public class Main extends JavaPlugin{
     @Override
     public void onEnable(){
 
-        //ohai
+        //TODO: Enable stuff?
 
     }
 
     @Override
     public void onDisable(){
 
-        //kbye
+        //TODO: Disable stuff?
 
     }
 
