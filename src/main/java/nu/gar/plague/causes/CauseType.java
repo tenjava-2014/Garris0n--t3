@@ -12,14 +12,15 @@ import java.util.Set;
 
 public enum CauseType{
 
-    RANDOM(CauseRandom.class);
+    RANDOM("random", CauseRandom.class);
 
     private String key;
 
     private Class<? extends PlagueCause> clazz;
 
-    CauseType(Class<? extends PlagueCause> clazz){
+    CauseType(String key, Class<? extends PlagueCause> clazz){
 
+        this.key = key;
         this.clazz = clazz;
 
     }
