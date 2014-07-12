@@ -24,4 +24,9 @@ public abstract class PlagueCause implements Listener{
 
     }
 
+    public Plague getPlague(){
+
+        return plague;
+
+    }
 }

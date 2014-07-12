@@ -15,10 +15,10 @@ public class AttributePoison extends PlagueAttribute{
     private int duration;
     private int amplifier;
 
-    private int initialWait;
+    private int initialDelay;
     private int frequency;
 
-    public AttributePoison(Main plugin, int duration, int amplifier, int initialWait, int frequency){
+    public AttributePoison(Main plugin, int duration, int amplifier, int initialDelay, int frequency){
 
         super(plugin);
 
@@ -27,7 +27,7 @@ public class AttributePoison extends PlagueAttribute{
         this.duration = duration;
         this.amplifier = amplifier;
 
-        this.initialWait = initialWait;
+        this.initialDelay = initialDelay;
         this.frequency = frequency;
 
     }
@@ -52,7 +52,7 @@ public class AttributePoison extends PlagueAttribute{
             }
         };
 
-        runnable.runTaskTimer(getPlugin(), initialWait, frequency);
+        runnable.runTaskTimer(getPlugin(), initialDelay, frequency);
 
         runnables.add(runnable);
 
