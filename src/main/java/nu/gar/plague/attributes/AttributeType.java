@@ -1,6 +1,7 @@
 package nu.gar.plague.attributes;
 
 import nu.gar.plague.Main;
+import nu.gar.plague.attributes.types.AttributePotionEffect;
 import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.ConfigurationSection;
@@ -12,7 +13,7 @@ import java.util.Set;
 
 public enum AttributeType{
 
-    ;
+    POTION_EFFECT("potion-effect", AttributePotionEffect.class);
 
     private String key;
     private Class<? extends PlagueAttribute> clazz;
