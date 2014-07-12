@@ -3,6 +3,7 @@ package nu.gar.plague;
 import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +30,14 @@ public class PlagueOptions{
             EntityType type = EntityType.valueOf(s);
 
             if(type == null)
-                throw new PlagueFailedToLoadException("Entity Type \"" + s + "\" is invalid.");
+                throw new PlagueFailedToLoadException("Entity type \"" + s + "\" is invalid.");
+
+            if(!LivingEntity.class.isAssignableFrom(type.getEntityClass()))
+                throw new PlagueFailedToLoadException("Entity type \"" + s + "\" is not a living entity type.");
 
             vulnerable.add(type);
 
         }
-
-    }
-
-    public PlagueOptions(String displayName, List<EntityType> vulnerable, List<String> worlds){
-
-        this.displayName = displayName;
-        this.vulnerable = vulnerable;
-        this.worlds = worlds;
 
     }
 

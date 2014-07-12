@@ -2,7 +2,7 @@ package nu.gar.plague.causes;
 
 import nu.gar.plague.Main;
 import nu.gar.plague.Plague;
-import nu.gar.plague.causes.type.CauseRandom;
+import nu.gar.plague.causes.type.*;
 import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.ConfigurationSection;
@@ -14,7 +14,9 @@ import java.util.Set;
 
 public enum CauseType{
 
-    RANDOM("random", CauseRandom.class);
+    RANDOM("random", CauseRandom.class),
+    LOCATION_RADIUS("location-radius", CauseLocationRadius.class),
+    LOCATION_CUBOID("location-cuboid", CauseLocationCuboid.class);
 
     private String key;
     private Class<? extends PlagueCause> clazz;

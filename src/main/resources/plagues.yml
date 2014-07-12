@@ -32,7 +32,7 @@ flu:
       amplifier: 50
       ambient: false
       initial-delay: 0
-      frequency: 190
+      frequency: 10
     send-message:
       message: '&cYou (&7%player-name%&c) have the flu.'
     broadcast:
@@ -42,6 +42,6 @@ flu:
       initial-delay: 0
       frequency: 20
   causes:
-    random:
-      initial-delay: 0
-      frequency: 20
+    location-cuboid:
+      corner1: TestWorld|85|154|-131
+      corner2: TestWorld|83|152|-134

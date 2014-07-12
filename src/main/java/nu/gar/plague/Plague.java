@@ -64,14 +64,14 @@ public class Plague{
 
     }
 
-    public List<Entity> getInfectableEntities(){
+    public List<LivingEntity> getInfectableEntities(){
 
-        List<Entity> entities = new ArrayList<>();
+        List<LivingEntity> entities = new ArrayList<>();
 
         for(World w : getAffectedWorlds())
             for(Entity e : w.getEntities())
                 if(isVulnerable(e) && !isInfected(e))
-                    entities.add(e);
+                    entities.add((LivingEntity) e);
 
         return entities;
 

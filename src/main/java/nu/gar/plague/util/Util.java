@@ -1,28 +1,41 @@
 package nu.gar.plague.util;
 
-import org.bukkit.World;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
+import org.bukkit.*;
 
-import java.util.*;
+import java.util.regex.Pattern;
 
 public class Util{
 
-    public static List<Entity> getEntities(List<EntityType> types, List<World> worlds){
+    public static Location parseLocation(String string){
 
-        Iterator<EntityType> typeIterator = types.iterator();
+        String[] split = string.split(Pattern.quote("|"));
 
-        Class[] classes = new Class[types.size()];
+        if(split.length < 4)
+            return null;
 
-        for(int i = 0; i < types.size(); i++)
-            classes[i] = typeIterator.next().getEntityClass();
+        World world = Bukkit.getServer().getWorld(split[0]);
 
-        List<Entity> entities = new ArrayList<>();
+        if(world == null)
+            return null;
 
-        for(World w : worlds)
-            entities.addAll(w.getEntitiesByClasses(classes));
+        double x;
+        double y;
+        double z;
 
-        return entities;
+        try{
+
+            x = Double.parseDouble(split[1]);
+            y = Double.parseDouble(split[2]);
+            z = Double.parseDouble(split[3]);
+
+        }
+        catch(NumberFormatException e){
+
+            return null;
+
+        }
+
+        return new Location(world, x, y, z);
 
     }
 

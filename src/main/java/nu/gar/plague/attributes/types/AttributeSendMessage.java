@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class AttributeSendMessage extends PlagueAttribute{
 
-    public static final String NAME_REPLACEMENT = "%player-name";
+    public static final String NAME_REPLACEMENT = "%player-name%";
     public static final String DISPLAY_NAME_REPLACEMENT = "%player-display-name%";
 
     private String message;
