@@ -1,3 +1,4 @@
-name: TenJava
+name: Plague
 main: ${main.class}
 version: ${project.version}
+author: ${author}
