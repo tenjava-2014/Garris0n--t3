@@ -13,5 +13,5 @@ swine-flu:
       frequency: 20000
   causes:
     RANDOM:
-      initial-delay:0
+      initial-delay: 0
       frequency: 20
