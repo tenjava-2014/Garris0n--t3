@@ -1,0 +1,17 @@
+swine-flu:
+  options:
+    display-name: 'Swine Flu'
+    enabled-worlds:
+    - 'TestWorld'
+    vulnerable-entity-types:
+    - 'PIG'
+  attributes:
+    POISON:
+      duration: 200
+      amplifier: 1
+      initial-delay: 0
+      frequency:  20000
+  causes:
+    RANDOM:
+      initial-delay:0
+      frequency: 20

@@ -2,10 +2,8 @@ package nu.gar.plague;
 
 import nu.gar.plague.attributes.AttributeType;
 import nu.gar.plague.attributes.PlagueAttribute;
-import nu.gar.plague.attributes.types.AttributePoison;
 import nu.gar.plague.causes.CauseType;
 import nu.gar.plague.causes.PlagueCause;
-import nu.gar.plague.causes.types.CauseRandom;
 import nu.gar.plague.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -35,23 +33,6 @@ public class Plague{
         this.causes = CauseType.getCauses(plugin, this, section.getConfigurationSection(Key.CAUSES.getString()));
 
         this.infected = new HashSet<>();
-
-    }
-
-    //TODO: FOR TESTING ONLY, WILL BE REMOVED
-    public Plague(Main plugin, String displayName){
-
-        this.plugin = plugin;
-
-        this.options = new PlagueOptions(displayName, Arrays.asList(EntityType.PIG), Arrays.asList(Bukkit.getServer().getWorlds().iterator().next().getName())); //it's only for testing ._.
-
-        this.attributes = new HashSet<>();
-        this.causes = new HashSet<>();
-
-        this.infected = new HashSet<>();
-
-        this.attributes.add(new AttributePoison(plugin, 200, 1, 0, 5));
-        this.causes.add(new CauseRandom(plugin, this, 0, 100));
 
     }
 
@@ -134,12 +115,6 @@ public class Plague{
     public boolean isInfected(Entity entity){
 
         return getInfected().contains(entity.getUniqueId());
-
-    }
-
-    private boolean validType(EntityType type){
-
-        return type.getEntityClass().isAssignableFrom(LivingEntity.class);
 
     }
 

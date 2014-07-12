@@ -15,9 +15,8 @@ public class CauseRandom extends PlagueCause{
 
     public CauseRandom(Main plugin, Plague plague, ConfigurationSection section){
 
-        super(plugin, plague);
-
-        //TODO: Construct
+        this(plugin, plague, section.getInt(Key.INITIAL_DELAY.getString()),
+                section.getInt(Key.FREQUENCY.getString()));
 
     }
 
@@ -43,6 +42,27 @@ public class CauseRandom extends PlagueCause{
 
             }
         }.runTaskTimer(getPlugin(), initialDelay, frequency);
+
+    }
+
+    private static enum Key{
+
+        INITIAL_DELAY("initial-delay"),
+        FREQUENCY("frequency");
+
+        private String string;
+
+        private Key(String string){
+
+            this.string = string;
+
+        }
+
+        public String getString(){
+
+            return string;
+
+        }
 
     }
 

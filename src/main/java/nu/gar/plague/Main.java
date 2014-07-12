@@ -24,8 +24,6 @@ public final class Main extends JavaPlugin{
 
         this.plagueHandler = new PlagueHandler(this);
 
-        this.plagueHandler.addPlague("test", new Plague(this, "Pig Hitler"));
-
     }
 
     @Override

@@ -21,9 +21,8 @@ public class AttributePoison extends PlagueAttribute{
 
     public AttributePoison(Main plugin, ConfigurationSection section){
 
-        super(plugin);
-
-        //TODO: construct
+        this(plugin, section.getInt(Key.DURATION.getString()), section.getInt(Key.AMPLIFIER.getString()),
+                section.getInt(Key.INITIAL_DELAY.getString()), section.getInt(Key.FREQUENCY.getString()));
 
     }
 
@@ -76,6 +75,29 @@ public class AttributePoison extends PlagueAttribute{
 
             iterator.next().cancel();
             iterator.remove();
+
+        }
+
+    }
+
+    private static enum Key{
+
+        DURATION("duration"),
+        AMPLIFIER("amplifier"),
+        INITIAL_DELAY("initial-delay"),
+        FREQUENCY("frequency");
+
+        private String string;
+
+        private Key(String string){
+
+            this.string = string;
+
+        }
+
+        public String getString(){
+
+            return string;
 
         }
 

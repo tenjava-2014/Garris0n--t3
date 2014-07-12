@@ -1,6 +1,7 @@
 package nu.gar.plague.attributes;
 
 import nu.gar.plague.Main;
+import nu.gar.plague.attributes.types.AttributePoison;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.lang.reflect.Constructor;
@@ -10,7 +11,7 @@ import java.util.Set;
 
 public enum AttributeType{
 
-    ;
+    POISON(AttributePoison.class);
 
     private Class<? extends PlagueAttribute> clazz;
 
