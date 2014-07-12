@@ -3,8 +3,7 @@ package nu.gar.plague;
 import nu.gar.plague.attributes.PlagueAttribute;
 import nu.gar.plague.causes.PlagueCause;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.*;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class Plague{
 
     }
 
-    public void apply(Entity entity){
+    public void apply(LivingEntity entity){
 
         if(!isVulnerable(entity))
             return;
@@ -49,6 +48,12 @@ public class Plague{
     public boolean isVulnerable(Entity entity){
 
         return isVulnerable(entity.getType());
+
+    }
+
+    private boolean validType(EntityType type){
+
+        return type.getEntityClass().isAssignableFrom(LivingEntity.class);
 
     }
 

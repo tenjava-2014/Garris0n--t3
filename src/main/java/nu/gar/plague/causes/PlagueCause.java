@@ -18,4 +18,10 @@ public abstract class PlagueCause implements Listener{
 
     }
 
+    public Main getPlugin(){
+
+        return plugin;
+
+    }
+
 }

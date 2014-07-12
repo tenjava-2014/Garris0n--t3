@@ -1,7 +1,7 @@
 package nu.gar.plague.attributes;
 
 import nu.gar.plague.Main;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 
 public abstract class PlagueAttribute{
 
@@ -13,6 +13,12 @@ public abstract class PlagueAttribute{
 
     }
 
-    public abstract void giveSymptoms(Entity entity);
+    public Main getPlugin(){
+
+        return plugin;
+
+    }
+
+    public abstract void giveSymptoms(LivingEntity entity);
 
 }
