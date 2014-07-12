@@ -31,14 +31,16 @@ public class Plague{
     }
 
     //TODO: FOR TESTING ONLY, WILL BE REMOVED
-    public Plague(Main plugin){
+    public Plague(Main plugin, String displayName){
 
         this.plugin = plugin;
 
-        this.options = new PlagueOptions(Arrays.asList(EntityType.PIG), Arrays.asList(Bukkit.getServer().getWorlds().iterator().next().getName())); //it's only for testing ._.
+        this.options = new PlagueOptions(displayName, Arrays.asList(EntityType.PIG), Arrays.asList(Bukkit.getServer().getWorlds().iterator().next().getName())); //it's only for testing ._.
 
         this.attributes = new HashSet<>();
         this.causes = new HashSet<>();
+
+        this.infected = new HashSet<>();
 
         this.attributes.add(new AttributePoison(plugin, 200, 1, 0, 5));
         this.causes.add(new CauseRandom(plugin, this, 0, 100));
@@ -47,10 +49,7 @@ public class Plague{
 
     public void infect(LivingEntity entity){
 
-        if(!isVulnerable(entity))
-            return;
-
-        if(getInfected().contains(entity.getUniqueId()))
+        if(!isVulnerable(entity) || isInfected(entity))
             return;
 
         infected.add(entity.getUniqueId());
@@ -58,12 +57,22 @@ public class Plague{
         for(PlagueAttribute a : attributes)
             a.giveSymptoms(entity);
 
+        plugin.debug("Infected " + entity.toString() + " with " + getDisplayName() + ".");
+
     }
 
     public void stop(){
 
         for(PlagueAttribute pa : attributes)
             pa.stop();
+
+        getInfected().clear();
+
+    }
+
+    public String getDisplayName(){
+
+        return options.getDisplayName();
 
     }
 
@@ -111,6 +120,12 @@ public class Plague{
     public boolean isVulnerable(Entity entity){
 
         return options.getWorlds().contains(entity.getWorld().getName()) && isVulnerable(entity.getType());
+
+    }
+
+    public boolean isInfected(Entity entity){
+
+        return getInfected().contains(entity.getUniqueId());
 
     }
 

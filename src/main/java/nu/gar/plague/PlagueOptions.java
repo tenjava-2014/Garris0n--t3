@@ -7,6 +7,7 @@ import java.util.List;
 
 public class PlagueOptions{
 
+    private String displayName;
     private List<EntityType> vulnerable;
     private List<String> worlds;
 
@@ -16,10 +17,17 @@ public class PlagueOptions{
 
     }
 
-    public PlagueOptions(List<EntityType> vulnerable, List<String> worlds){
+    public PlagueOptions(String displayName, List<EntityType> vulnerable, List<String> worlds){
 
+        this.displayName = displayName;
         this.vulnerable = vulnerable;
         this.worlds = worlds;
+
+    }
+
+    public String getDisplayName(){
+
+        return displayName;
 
     }
 
