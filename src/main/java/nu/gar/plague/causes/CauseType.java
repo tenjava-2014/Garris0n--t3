@@ -3,6 +3,8 @@ package nu.gar.plague.causes;
 import nu.gar.plague.Main;
 import nu.gar.plague.Plague;
 import nu.gar.plague.causes.types.CauseRandom;
+import nu.gar.plague.exceptions.PlagueFailedToLoadException;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.lang.reflect.Constructor;
@@ -48,9 +50,8 @@ public enum CauseType{
         catch(NoSuchMethodException | InvocationTargetException |
                 InstantiationException | IllegalAccessException e){
 
-            //TODO: Handle
-            e.printStackTrace();
-            return null;
+            throw new PlagueFailedToLoadException("Could not instantiate cause \"" + toString() +
+                    "\" due to the following exception: " + ExceptionUtils.getStackTrace(e));
 
         }
 
@@ -75,7 +76,7 @@ public enum CauseType{
             CauseType ct = CauseType.getCauseType(s);
 
             if(ct == null)
-                continue; //TODO: handle
+                throw new PlagueFailedToLoadException("Cause \"" + s + "\" is invalid.");
 
             causes.add(ct.create(plugin, plague, section.getConfigurationSection(s)));
 

@@ -2,6 +2,8 @@ package nu.gar.plague.attributes;
 
 import nu.gar.plague.Main;
 import nu.gar.plague.attributes.types.AttributePoison;
+import nu.gar.plague.exceptions.PlagueFailedToLoadException;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.lang.reflect.Constructor;
@@ -47,9 +49,8 @@ public enum AttributeType{
         catch(NoSuchMethodException | InvocationTargetException |
                 InstantiationException | IllegalAccessException e){
 
-            //TODO: Handle
-            e.printStackTrace();
-            return null;
+            throw new PlagueFailedToLoadException("Could not instantiate attribute \"" + toString() +
+                    "\" due to the following exception: " + ExceptionUtils.getStackTrace(e));
 
         }
 
@@ -74,7 +75,7 @@ public enum AttributeType{
             AttributeType at = AttributeType.getAttributeType(s);
 
             if(at == null)
-                continue; //TODO: handle
+                throw new PlagueFailedToLoadException("Attribute \"" + s + "\" is invalid.");
 
             attributes.add(at.create(plugin, section));
 

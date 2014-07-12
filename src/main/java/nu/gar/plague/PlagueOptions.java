@@ -1,5 +1,6 @@
 package nu.gar.plague;
 
+import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 
@@ -14,8 +15,13 @@ public class PlagueOptions{
 
     public PlagueOptions(ConfigurationSection section){
 
+        for(Key k : Key.values())
+            if(!section.contains(k.getString()))
+                throw new PlagueFailedToLoadException("Missing a required option: " + k + ".");
+
         this.displayName = section.getString(Key.DISPLAY_NAME.getString());
         this.worlds = section.getStringList(Key.WORLDS.getString());
+
         this.vulnerable = new ArrayList<>();
 
         for(String s : section.getStringList(Key.VULNERABLE.getString())){
@@ -23,7 +29,7 @@ public class PlagueOptions{
             EntityType type = EntityType.valueOf(s);
 
             if(type == null)
-                return; //TODO: handle
+                throw new PlagueFailedToLoadException("Entity Type \"" + s + "\" is invalid.");
 
             vulnerable.add(type);
 
