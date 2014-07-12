@@ -6,12 +6,12 @@ swine-flu:
     vulnerable-entity-types:
     - 'PIG'
   attributes:
-    POISON:
+    poison:
       duration: 200
       amplifier: 1
       initial-delay: 0
       frequency: 20000
   causes:
-    RANDOM:
+    random:
       initial-delay: 0
       frequency: 20

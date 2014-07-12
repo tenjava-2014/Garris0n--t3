@@ -11,13 +11,21 @@ import java.util.Set;
 
 public enum AttributeType{
 
-    POISON(AttributePoison.class);
+    POISON("poison", AttributePoison.class);
 
+    private String key;
     private Class<? extends PlagueAttribute> clazz;
 
-    AttributeType(Class<? extends PlagueAttribute> clazz){
+    private AttributeType(String key, Class<? extends PlagueAttribute> clazz){
 
+        this.key = key;
         this.clazz = clazz;
+
+    }
+
+    public String getKey(){
+
+        return key;
 
     }
 
@@ -47,13 +55,23 @@ public enum AttributeType{
 
     }
 
+    public static AttributeType getAttributeType(String key){
+
+        for(AttributeType at : AttributeType.values())
+            if(at.getKey().equals(key))
+                return at;
+
+        return null;
+
+    }
+
     public static Set<PlagueAttribute> getAttributes(Main plugin, ConfigurationSection section){
 
         Set<PlagueAttribute> attributes = new HashSet<>();
 
         for(String s : section.getKeys(false)){
 
-            AttributeType at = AttributeType.valueOf(s);
+            AttributeType at = AttributeType.getAttributeType(s);
 
             if(at == null)
                 continue; //TODO: handle

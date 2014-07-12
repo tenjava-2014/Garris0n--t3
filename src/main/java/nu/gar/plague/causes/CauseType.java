@@ -14,11 +14,19 @@ public enum CauseType{
 
     RANDOM(CauseRandom.class);
 
+    private String key;
+
     private Class<? extends PlagueCause> clazz;
 
     CauseType(Class<? extends PlagueCause> clazz){
 
         this.clazz = clazz;
+
+    }
+
+    public String getKey(){
+
+        return key;
 
     }
 
@@ -48,13 +56,23 @@ public enum CauseType{
 
     }
 
+    public static CauseType getCauseType(String key){
+
+        for(CauseType ct : CauseType.values())
+            if(ct.getKey().equals(key))
+                return ct;
+
+        return null;
+
+    }
+
     public static Set<PlagueCause> getCauses(Main plugin, Plague plague, ConfigurationSection section){
 
         Set<PlagueCause> causes = new HashSet<>();
 
         for(String s : section.getKeys(false)){
 
-            CauseType ct = CauseType.valueOf(s);
+            CauseType ct = CauseType.getCauseType(s);
 
             if(ct == null)
                 continue; //TODO: handle

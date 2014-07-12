@@ -41,7 +41,7 @@ public class AttributePoison extends PlagueAttribute{
     }
 
     @Override
-    public void giveSymptoms(LivingEntity entity){
+    public void giveSymptoms(final LivingEntity entity){
 
         EntityRunnable runnable = new EntityRunnable(entity){
 
@@ -56,6 +56,7 @@ public class AttributePoison extends PlagueAttribute{
             public void entityGone(){
 
                 runnables.remove(this);
+                getPlugin().debug(entity.toString() + " died, removed from list.");
 
             }
         };
