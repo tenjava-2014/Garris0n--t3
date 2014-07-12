@@ -1,13 +1,21 @@
 package nu.gar.plague.causes;
 
-public abstract class PlagueCause{
+import nu.gar.plague.Main;
+import nu.gar.plague.Plague;
+import org.bukkit.event.Listener;
 
-    public PlagueCause(){
+public abstract class PlagueCause implements Listener{
 
+    private Main plugin;
+    private Plague plague;
 
+    public PlagueCause(Main plugin, Plague plague){
+
+        this.plugin = plugin;
+        this.plague = plague;
+
+        plugin.getServer().getPluginManager().registerEvents(this, plugin);
 
     }
-
-
 
 }

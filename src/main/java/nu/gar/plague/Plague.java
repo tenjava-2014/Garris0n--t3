@@ -10,18 +10,29 @@ import java.util.List;
 
 public class Plague{
 
+    private Main plugin;
+
     private List<EntityType> vulnerable;
 
     private List<PlagueAttribute> attributes;
     private List<PlagueCause> causes;
 
-    public Plague(ConfigurationSection section){
+    public Plague(Main plugin, ConfigurationSection section){
 
+        this.plugin = plugin;
         //TODO: Load
 
     }
 
+    public void apply(Entity entity){
 
+        if(!isVulnerable(entity))
+            return;
+
+        for(PlagueAttribute a : attributes)
+            a.giveSymptoms(entity);
+
+    }
 
     public List<EntityType> getVulnerableEntities(){
 

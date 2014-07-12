@@ -1,16 +1,17 @@
 package nu.gar.plague.attributes;
 
-import javax.swing.text.html.parser.Entity;
+import nu.gar.plague.Main;
+import org.bukkit.entity.Entity;
 
 public abstract class PlagueAttribute{
 
+    private Main plugin;
 
-    public PlagueAttribute(){
+    public PlagueAttribute(Main plugin){
 
-
+        this.plugin = plugin;
 
     }
-
 
     public abstract void giveSymptoms(Entity entity);
 
