@@ -33,6 +33,13 @@ public class Plague{
 
     }
 
+    public void stop(){
+
+        for(PlagueAttribute pa : attributes)
+            pa.stop();
+
+    }
+
     public List<EntityType> getVulnerableEntities(){
 
         return vulnerable;
