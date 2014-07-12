@@ -1,5 +1,6 @@
 package nu.gar.plague;
 
+import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
@@ -26,8 +27,19 @@ public class PlagueHandler{
 
         for(String s : plagues.getKeys(false)){
 
-            addPlague(s, new Plague(plugin, plagues.getConfigurationSection(s)));
-            //TODO: Error checking
+            try{
+
+                Plague p = new Plague(plugin, plagues.getConfigurationSection(s));
+                addPlague(s, p);
+
+                plugin.getLogger().info("Loaded Plague \"" + p.getDisplayName() + "\" (" + s + ").");
+
+            }
+            catch(PlagueFailedToLoadException e){
+
+                plugin.getLogger().warning("Plague \"" + s + "\" failed to load: " + e.getMessage());
+
+            }
 
         }
 
@@ -37,6 +49,13 @@ public class PlagueHandler{
 
         plagues.clear();
         loadPlagues();
+
+    }
+
+    public void stopAll(){
+
+        for(Plague p : getPlagues().values())
+            p.stop();
 
     }
 

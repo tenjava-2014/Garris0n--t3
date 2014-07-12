@@ -15,7 +15,6 @@ public enum CauseType{
     RANDOM("random", CauseRandom.class);
 
     private String key;
-
     private Class<? extends PlagueCause> clazz;
 
     CauseType(String key, Class<? extends PlagueCause> clazz){

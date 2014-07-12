@@ -30,7 +30,7 @@ public final class Main extends JavaPlugin{
     @Override
     public void onDisable(){
 
-        //TODO: Disable stuff?
+        getPlagueHandler().stopAll();
 
     }
 
