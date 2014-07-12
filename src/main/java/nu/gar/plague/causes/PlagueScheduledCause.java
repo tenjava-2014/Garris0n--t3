@@ -1,31 +1,25 @@
-package nu.gar.plague.attributes;
+package nu.gar.plague.causes;
 
 import nu.gar.plague.Main;
+import nu.gar.plague.Plague;
 import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import nu.gar.plague.util.VariableInteger;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public abstract class PlagueScheduledAttribute extends PlagueAttribute{
-
-    private Set<BukkitRunnable> runnables;
+public class PlagueScheduledCause extends PlagueCause{
 
     private VariableInteger initialDelay;
     private VariableInteger frequency;
 
-    public PlagueScheduledAttribute(Main plugin, ConfigurationSection section){
+    public PlagueScheduledCause(Main plugin, Plague plague, ConfigurationSection section){
 
-        super(plugin);
+        super(plugin, plague);
 
         for(Key k : Key.values())
             if(!section.contains(k.getString()))
-                throw new PlagueFailedToLoadException("Attribute \"" + section.getName() +
+                throw new PlagueFailedToLoadException("Cause \"" + section.getName() +
                         "\" is  missing a required option: " + k + ".");
-
-        this.runnables = new HashSet<>();
 
         this.initialDelay = VariableInteger.create(section.get(Key.INITIAL_DELAY.getString()));
         this.frequency = VariableInteger.create(section.get(Key.FREQUENCY.getString()));
@@ -44,27 +38,12 @@ public abstract class PlagueScheduledAttribute extends PlagueAttribute{
 
     }
 
-    public Set<BukkitRunnable> getRunnables(){
-
-        return runnables;
-
-    }
-
     public void run(BukkitRunnable runnable){
 
         if(frequency.getInt() == -1)
             runnable.runTaskLater(getPlugin(), getInitialDelay());
         else
             runnable.runTaskTimer(getPlugin(), getInitialDelay(), getFrequency());
-
-        getRunnables().add(runnable);
-
-    }
-
-    @Override
-    public void stop(){
-
-        getRunnables().clear();
 
     }
 
@@ -88,5 +67,6 @@ public abstract class PlagueScheduledAttribute extends PlagueAttribute{
         }
 
     }
+
 
 }

@@ -4,7 +4,6 @@ import nu.gar.plague.attributes.AttributeType;
 import nu.gar.plague.attributes.PlagueAttribute;
 import nu.gar.plague.causes.CauseType;
 import nu.gar.plague.causes.PlagueCause;
-import nu.gar.plague.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -65,9 +64,16 @@ public class Plague{
 
     }
 
-    public List<Entity> getVulnerableEntities(){
+    public List<Entity> getInfectableEntities(){
 
-        return Util.getEntities(getVulnerableEntityTypes(), getAffectedWorlds());
+        List<Entity> entities = new ArrayList<>();
+
+        for(World w : getAffectedWorlds())
+            for(Entity e : w.getEntities())
+                if(isVulnerable(e) && !isInfected(e))
+                    entities.add(e);
+
+        return entities;
 
     }
 

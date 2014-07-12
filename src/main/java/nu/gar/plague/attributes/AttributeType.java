@@ -13,7 +13,7 @@ import java.util.Set;
 
 public enum AttributeType{
 
-    POTION_EFFECT("potion-effect", AttributePotionEffect.class);
+    POTION_EFFECT("potion", AttributePotionEffect.class);
 
     private String key;
     private Class<? extends PlagueAttribute> clazz;
@@ -46,11 +46,20 @@ public enum AttributeType{
             return (PlagueAttribute) constructor.newInstance(plugin, section);
 
         }
-        catch(NoSuchMethodException | InvocationTargetException |
+        catch(NoSuchMethodException |
                 InstantiationException | IllegalAccessException e){
 
             throw new PlagueFailedToLoadException("Could not instantiate attribute \"" + toString() +
                     "\" due to the following exception: " + ExceptionUtils.getStackTrace(e));
+
+        }
+        catch(InvocationTargetException e){
+
+            if(e.getCause() instanceof PlagueFailedToLoadException)
+                throw new PlagueFailedToLoadException(e.getCause().getMessage());
+
+            throw new PlagueFailedToLoadException("Could not instantiate attribute \"" + toString() +
+                    "\" due to the following exception: " + ExceptionUtils.getStackTrace(e.getCause()));
 
         }
 
@@ -77,7 +86,7 @@ public enum AttributeType{
             if(at == null)
                 throw new PlagueFailedToLoadException("Attribute \"" + s + "\" is invalid.");
 
-            attributes.add(at.create(plugin, section));
+            attributes.add(at.create(plugin, section.getConfigurationSection(s)));
 
         }
 

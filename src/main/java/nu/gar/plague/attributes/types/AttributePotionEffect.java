@@ -22,8 +22,8 @@ public class AttributePotionEffect extends PlagueScheduledAttribute{
 
         for(Key k : Key.values())
             if(!section.contains(k.getString()))
-                throw new PlagueFailedToLoadException("Attribute " + section.getName() +
-                        "is  missing a required option: " + k + ".");
+                throw new PlagueFailedToLoadException("Attribute \"" + section.getName() +
+                        "\" is  missing a required option: " + k + ".");
 
         effectType = PotionEffectType.getByName(section.getString(Key.EFFECT_TYPE.getString()));
 

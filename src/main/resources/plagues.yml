@@ -6,9 +6,11 @@ swine-flu:
     vulnerable-entity-types:
     - 'PIG'
   attributes:
-    poison:
+    potion:
+      effect: WITHER
       duration: 200
       amplifier: 1
+      ambient: false
       initial-delay: 0
       frequency: 20000
   causes:
