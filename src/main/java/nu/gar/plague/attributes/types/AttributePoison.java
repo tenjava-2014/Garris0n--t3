@@ -2,6 +2,7 @@ package nu.gar.plague.attributes.types;
 
 import nu.gar.plague.Main;
 import nu.gar.plague.attributes.PlagueAttribute;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -17,6 +18,14 @@ public class AttributePoison extends PlagueAttribute{
 
     private int initialDelay;
     private int frequency;
+
+    public AttributePoison(Main plugin, ConfigurationSection section){
+
+        super(plugin);
+
+        //TODO: construct
+
+    }
 
     public AttributePoison(Main plugin, int duration, int amplifier, int initialDelay, int frequency){
 

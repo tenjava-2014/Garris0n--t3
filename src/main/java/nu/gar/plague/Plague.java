@@ -1,7 +1,9 @@
 package nu.gar.plague;
 
+import nu.gar.plague.attributes.AttributeType;
 import nu.gar.plague.attributes.PlagueAttribute;
 import nu.gar.plague.attributes.types.AttributePoison;
+import nu.gar.plague.causes.CauseType;
 import nu.gar.plague.causes.PlagueCause;
 import nu.gar.plague.causes.types.CauseRandom;
 import nu.gar.plague.util.Util;
@@ -26,7 +28,13 @@ public class Plague{
     public Plague(Main plugin, ConfigurationSection section){
 
         this.plugin = plugin;
-        //TODO: Load
+
+        this.options = new PlagueOptions(section.getConfigurationSection(Key.OPTIONS.getString()));
+
+        this.attributes = AttributeType.getAttributes(plugin, section.getConfigurationSection(Key.ATTRIBUTES.getString()));
+        this.causes = CauseType.getCauses(plugin, this, section.getConfigurationSection(Key.CAUSES.getString()));
+
+        this.infected = new HashSet<>();
 
     }
 
@@ -132,6 +140,28 @@ public class Plague{
     private boolean validType(EntityType type){
 
         return type.getEntityClass().isAssignableFrom(LivingEntity.class);
+
+    }
+
+    private static enum Key{
+
+        OPTIONS("options"),
+        ATTRIBUTES("attributes"),
+        CAUSES("causes");
+
+        private String string;
+
+        private Key(String string){
+
+            this.string = string;
+
+        }
+
+        public String getString(){
+
+            return string;
+
+        }
 
     }
 

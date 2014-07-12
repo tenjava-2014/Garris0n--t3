@@ -3,6 +3,7 @@ package nu.gar.plague.causes.types;
 import nu.gar.plague.Main;
 import nu.gar.plague.Plague;
 import nu.gar.plague.causes.PlagueCause;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -11,6 +12,14 @@ import java.util.List;
 import java.util.Random;
 
 public class CauseRandom extends PlagueCause{
+
+    public CauseRandom(Main plugin, Plague plague, ConfigurationSection section){
+
+        super(plugin, plague);
+
+        //TODO: Construct
+
+    }
 
     public CauseRandom(Main plugin, Plague plague, int initialDelay, int frequency){
 
