@@ -4,12 +4,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin{
 
-
+    private PlagueHandler plagueHandler;
 
     @Override
     public void onEnable(){
 
-        //TODO: Enable stuff?
+        this.plagueHandler = new PlagueHandler(this);
+
+        this.plagueHandler.addPlague("test", new Plague(this));
 
     }
 
@@ -20,6 +22,10 @@ public final class Main extends JavaPlugin{
 
     }
 
+    public PlagueHandler getPlagueHandler(){
 
+        return plagueHandler;
+
+    }
 
 }

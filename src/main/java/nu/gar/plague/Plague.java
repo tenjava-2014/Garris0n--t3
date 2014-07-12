@@ -3,6 +3,7 @@ package nu.gar.plague;
 import nu.gar.plague.attributes.PlagueAttribute;
 import nu.gar.plague.attributes.types.AttributePoison;
 import nu.gar.plague.causes.PlagueCause;
+import nu.gar.plague.causes.types.CauseRandom;
 import nu.gar.plague.util.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -15,12 +16,12 @@ public class Plague{
 
     private Main plugin;
 
-    private Set<EntityType> vulnerable;
+    private PlagueOptions options;
 
     private Set<PlagueAttribute> attributes;
     private Set<PlagueCause> causes;
 
-    private List<String> worlds;
+    private Set<UUID> infected;
 
     public Plague(Main plugin, ConfigurationSection section){
 
@@ -30,18 +31,17 @@ public class Plague{
     }
 
     //TODO: FOR TESTING ONLY, WILL BE REMOVED
-    public Plague(){
+    public Plague(Main plugin){
 
-        this.vulnerable = new HashSet<>();
+        this.plugin = plugin;
+
+        this.options = new PlagueOptions(Arrays.asList(EntityType.PIG), Arrays.asList(Bukkit.getServer().getWorlds().iterator().next().getName())); //it's only for testing ._.
 
         this.attributes = new HashSet<>();
         this.causes = new HashSet<>();
 
-        this.worlds = new ArrayList<>();
-
-        this.vulnerable.add(EntityType.PLAYER);
-
-        this.attributes.add(new AttributePoison(plugin, 100, 1, 0, 99999)); //give poison once
+        this.attributes.add(new AttributePoison(plugin, 200, 1, 0, 5));
+        this.causes.add(new CauseRandom(plugin, this, 0, 100));
 
     }
 
@@ -49,6 +49,11 @@ public class Plague{
 
         if(!isVulnerable(entity))
             return;
+
+        if(getInfected().contains(entity.getUniqueId()))
+            return;
+
+        infected.add(entity.getUniqueId());
 
         for(PlagueAttribute a : attributes)
             a.giveSymptoms(entity);
@@ -68,11 +73,17 @@ public class Plague{
 
     }
 
-    public Set<World> getAffectedWorlds(){
+    public Set<UUID> getInfected(){
 
-        Set<World> worldSet = new HashSet<>();
+        return infected;
 
-        for(String s : worlds){
+    }
+
+    public List<World> getAffectedWorlds(){
+
+        List<World> worldSet = new ArrayList<>();
+
+        for(String s : options.getWorlds()){
 
             World w = Bukkit.getServer().getWorld(s);
 
@@ -85,9 +96,9 @@ public class Plague{
 
     }
 
-    public Set<EntityType> getVulnerableEntityTypes(){
+    public List<EntityType> getVulnerableEntityTypes(){
 
-        return vulnerable;
+        return options.getVulnerable();
 
     }
 
@@ -99,7 +110,7 @@ public class Plague{
 
     public boolean isVulnerable(Entity entity){
 
-        return isVulnerable(entity.getType());
+        return options.getWorlds().contains(entity.getWorld().getName()) && isVulnerable(entity.getType());
 
     }
 

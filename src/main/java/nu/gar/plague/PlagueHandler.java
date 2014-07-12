@@ -1,5 +1,6 @@
 package nu.gar.plague;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class PlagueHandler{
@@ -8,10 +9,22 @@ public class PlagueHandler{
 
     private Map<String, Plague> plagues;
 
-    public PlagueHandler(Main plugin, Map<String, Plague> plagues){
+    public PlagueHandler(Main plugin){
 
         this.plugin = plugin;
-        this.plagues = plagues;
+        this.plagues = new HashMap<>();
+
+    }
+
+    public void addPlague(String name, Plague plague){
+
+        getPlagues().put(name, plague);
+
+    }
+
+    public Map<String, Plague> getPlagues(){
+
+        return plagues;
 
     }
 

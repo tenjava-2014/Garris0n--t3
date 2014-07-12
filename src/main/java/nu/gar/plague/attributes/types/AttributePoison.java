@@ -40,7 +40,7 @@ public class AttributePoison extends PlagueAttribute{
             @Override
             public void run(LivingEntity entity){
 
-                entity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, duration, amplifier));
+                entity.addPotionEffect(new PotionEffect(PotionEffectType.POISON, duration, amplifier, false));
 
             }
 

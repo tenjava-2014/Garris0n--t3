@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Util{
 
-    public static List<Entity> getEntities(Set<EntityType> types, Set<World> worlds){
+    public static List<Entity> getEntities(List<EntityType> types, List<World> worlds){
 
         Iterator<EntityType> typeIterator = types.iterator();
 
