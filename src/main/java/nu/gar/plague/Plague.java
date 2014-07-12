@@ -77,6 +77,19 @@ public class Plague{
 
     }
 
+    public List<LivingEntity> getInfectedEntities(){
+
+        List<LivingEntity> infected = new ArrayList<>();
+
+        for(World w : Bukkit.getServer().getWorlds())
+            for(Entity e : w.getEntities())
+                if(e instanceof LivingEntity && isInfected(e))
+                    infected.add((LivingEntity) e);
+
+        return infected;
+
+    }
+
     public Set<UUID> getInfected(){
 
         return infected;

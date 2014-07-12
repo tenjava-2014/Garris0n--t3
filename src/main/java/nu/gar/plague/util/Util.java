@@ -2,9 +2,12 @@ package nu.gar.plague.util;
 
 import org.bukkit.*;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class Util{
+
+    private static final Random random = new Random();
 
     public static Location parseLocation(String string){
 
@@ -36,6 +39,12 @@ public class Util{
         }
 
         return new Location(world, x, y, z);
+
+    }
+
+    public static boolean chance(int number){
+
+        return random.nextInt(100) < number;
 
     }
 

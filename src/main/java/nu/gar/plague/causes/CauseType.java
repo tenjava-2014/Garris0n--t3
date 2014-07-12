@@ -16,7 +16,9 @@ public enum CauseType{
 
     RANDOM("random", CauseRandom.class),
     LOCATION_RADIUS("location-radius", CauseLocationRadius.class),
-    LOCATION_CUBOID("location-cuboid", CauseLocationCuboid.class);
+    LOCATION_CUBOID("location-cuboid", CauseLocationCuboid.class),
+    BLOCK_UNDER("block-under", CauseBlockUnder.class),
+    CONTAGION("contagion", CauseContagion.class);
 
     private String key;
     private Class<? extends PlagueCause> clazz;

@@ -4,7 +4,6 @@ import nu.gar.plague.Main;
 import nu.gar.plague.Plague;
 import nu.gar.plague.causes.PlagueScheduledCause;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -40,12 +39,12 @@ public class CauseRandom extends PlagueScheduledCause{
 
     private LivingEntity getRandomEntity(){
 
-        List<Entity> entities = getPlague().getInfectableEntities();
+        List<LivingEntity> entities = getPlague().getInfectableEntities();
 
         if(entities.isEmpty())
             return null;
 
-        return (LivingEntity) entities.get(random.nextInt(entities.size()));
+        return entities.get(random.nextInt(entities.size()));
 
     }
 

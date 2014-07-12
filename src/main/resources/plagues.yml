@@ -42,6 +42,9 @@ flu:
       initial-delay: 0
       frequency: 20
   causes:
-    location-cuboid:
-      corner1: TestWorld|85|154|-131
-      corner2: TestWorld|83|152|-134
+    contagion:
+      chance: 100
+      radius: 3
+    block-under:
+      chance: 100
+      block: DIRT

@@ -7,7 +7,7 @@ import nu.gar.plague.util.VariableInteger;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class PlagueScheduledCause extends PlagueCause{
+public abstract class PlagueScheduledCause extends PlagueCause{
 
     private VariableInteger initialDelay;
     private VariableInteger frequency;
@@ -67,6 +67,5 @@ public class PlagueScheduledCause extends PlagueCause{
         }
 
     }
-
 
 }

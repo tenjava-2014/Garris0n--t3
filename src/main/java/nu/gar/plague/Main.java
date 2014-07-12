@@ -11,7 +11,7 @@ import java.util.logging.Level;
 
 public final class Main extends JavaPlugin{
 
-    private final boolean debug = true;
+    private final boolean debug = false;
 
     private File plaguesFile;
     private FileConfiguration plagues;
