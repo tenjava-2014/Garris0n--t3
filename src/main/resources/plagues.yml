@@ -17,3 +17,31 @@ swine-flu:
     random:
       initial-delay: 0
       frequency: 20
+
+flu:
+  options:
+    display-name: 'Flu'
+    enabled-worlds:
+    - 'TestWorld'
+    vulnerable-entity-types:
+    - 'PLAYER'
+  attributes:
+    potion:
+      effect: REGENERATION
+      duration: 200
+      amplifier: 50
+      ambient: false
+      initial-delay: 0
+      frequency: 190
+    send-message:
+      message: '&cYou (&7%player-name%&c) have the flu.'
+    broadcast:
+      message: '&7%player-name%&c has the flu.'
+    damage:
+      damage: 2
+      initial-delay: 0
+      frequency: 20
+  causes:
+    random:
+      initial-delay: 0
+      frequency: 20

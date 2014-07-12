@@ -1,7 +1,7 @@
 package nu.gar.plague.attributes;
 
 import nu.gar.plague.Main;
-import nu.gar.plague.attributes.types.AttributePotionEffect;
+import nu.gar.plague.attributes.types.*;
 import nu.gar.plague.exceptions.PlagueFailedToLoadException;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.ConfigurationSection;
@@ -13,7 +13,10 @@ import java.util.Set;
 
 public enum AttributeType{
 
-    POTION_EFFECT("potion", AttributePotionEffect.class);
+    POTION_EFFECT("potion", AttributePotionEffect.class),
+    SEND_MESSAGE("send-message", AttributeSendMessage.class),
+    BROADCAST_MESSAGE("broadcast", AttributeBroadcastMessage.class),
+    DAMAGE("damage", AttributeDamage.class);
 
     private String key;
     private Class<? extends PlagueAttribute> clazz;
